@@ -11,6 +11,7 @@ version = "1.0"
 kotlin {
     android()
 
+
     val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget = when {
         System.getenv("SDK_NAME")?.startsWith("iphoneos") == true -> ::iosArm64
         else -> ::iosX64
@@ -27,7 +28,11 @@ kotlin {
     }
     
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies{
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
